@@ -6,9 +6,8 @@ let CLI = require('clui');
 //let Spinner = CLI.Spinner;
 
 function Spinner() {
-  this.start = function () {
-
-  }
+  this.start = function () {}
+  this.stop = function () {}
 }
 
 let actionList = [
