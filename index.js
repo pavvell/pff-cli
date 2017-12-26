@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 let inquirer = require('inquirer');
 
 let publishPatch = require('./src/actions/publish');
