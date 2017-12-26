@@ -2,10 +2,10 @@ let inquirer = require('inquirer');
 let git = require('simple-git')();
 let clear = require('clear');
 let commander = require('commander');
-var sys = require('sys');
-var exec = require('child_process').exec;
-var CLI = require('clui');
-var Spinner = CLI.Spinner;
+let sys = require('sys');
+let exec = require('child_process').exec;
+let CLI = require('clui');
+let Spinner = CLI.Spinner;
 
 let actionList = [
   {name: 'Publish updates (patch)', value: 'publishPatch'}
@@ -17,8 +17,65 @@ let actions = {
 
 async function publishPatch() {
   await askCommitMessage();
+  await patchNpmVersion();
+  await justPush();
+  await publish();
 
   console.log('done');
+}
+
+function patchNpmVersion() {
+  let status = new Spinner('Update version...');
+  status.start();
+
+  return new Promise((resolve, reject) => {
+    exec("npm version patch", function (error, stdout, stderr) {
+      sys.print('stdout: ' + stdout);
+      sys.print('stderr: ' + stderr);
+      status.stop();
+
+      if (error !== null) {
+        console.log('exec error: ' + error);
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function publish() {
+  let status = new Spinner('Publish...');
+  status.start();
+
+  return new Promise((resolve, reject) => {
+    exec("npm publish --registry=http://172.31.22.9:4873/", function (error, stdout, stderr) {
+      sys.print('stdout: ' + stdout);
+      sys.print('stderr: ' + stderr);
+      status.stop();
+
+      if (error !== null) {
+        console.log('exec error: ' + error);
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function justPush() {
+  let status = new Spinner('Push...');
+  status.start();
+
+  return new Promise(resolve => {
+    git
+      .push('origin', 'master')
+      .exec(() => {
+        status.stop();
+        resolve();
+      });
+  });
 }
 
 function askCommitMessage() {
