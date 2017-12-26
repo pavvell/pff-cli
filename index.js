@@ -1,6 +1,9 @@
 let inquirer = require('inquirer');
 let git = require('simple-git')();
 let clear = require('clear');
+let commander = require('commander');
+var sys = require('sys');
+var exec = require('child_process').exec;
 var CLI = require('clui');
 var Spinner = CLI.Spinner;
 
@@ -47,8 +50,8 @@ function askCommitMessage() {
       git
         .add('./*')
         .commit(commitMessage)
-//        .push('origin', 'master')
-        .then(function(){
+        .push('origin', 'master')
+        .exec(function(){
           status.stop();
           resolve();
         });
