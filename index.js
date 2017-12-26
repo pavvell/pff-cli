@@ -16,7 +16,7 @@ let actions = {
 };
 
 async function publishPatch() {
-  await askCommitMessage();
+  await askCommitMessageAndCommit();
   await patchNpmVersion();
   await justPush();
   await publish();
@@ -49,7 +49,7 @@ function publish() {
   status.start();
 
   return new Promise((resolve, reject) => {
-    exec("npm publish --registry=http://172.31.22.9:4873/", function (error, stdout, stderr) {
+    exec("npm publish", function (error, stdout, stderr) {
       sys.print('stdout: ' + stdout);
       sys.print('stderr: ' + stderr);
       status.stop();
@@ -78,7 +78,7 @@ function justPush() {
   });
 }
 
-function askCommitMessage() {
+function askCommitMessageAndCommit() {
   return new Promise(resolve => {
     let questions = [
       {
