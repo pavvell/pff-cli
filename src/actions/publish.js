@@ -14,5 +14,5 @@ module.exports = async function publishPatch() {
   await git.justPush();
   await npm.publish(settings.get().privateRepo);
 
-  console.log('done');
+  console.log('Done');
 };
