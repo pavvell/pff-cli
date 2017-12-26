@@ -1,5 +1,4 @@
 let git = require('simple-git')();
-let inquirer = require('inquirer');
 
 class Git {
   commit(message) {

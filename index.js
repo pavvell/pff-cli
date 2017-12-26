@@ -1,9 +1,4 @@
 let inquirer = require('inquirer');
-let git = require('simple-git')();
-let commander = require('commander');
-let exec = require('child_process').exec;
-let CLI = require('clui');
-let Spinner = CLI.Spinner;
 
 let publishPatch = require('./src/actions/publish');
 
