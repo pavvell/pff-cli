@@ -3,7 +3,13 @@ let git = require('simple-git')();
 let commander = require('commander');
 let exec = require('child_process').exec;
 let CLI = require('clui');
-let Spinner = CLI.Spinner;
+//let Spinner = CLI.Spinner;
+
+function Spinner() {
+  this.start = function () {
+
+  }
+}
 
 let actionList = [
   {name: 'Publish updates (patch)', value: 'publishPatch'}
