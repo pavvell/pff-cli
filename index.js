@@ -29,7 +29,7 @@ function patchNpmVersion() {
   return new Promise((resolve, reject) => {
     exec("npm version patch", function (error, stdout, stderr) {
       console.log(stdout);
-      
+
       if (error !== null) {
         console.log('exec error: ' + error);
         reject(error);
@@ -60,10 +60,7 @@ function justPush() {
   return new Promise(resolve => {
     git
       .push('origin', 'master')
-      .exec(() => {
-        status.stop();
-        resolve();
-      });
+      .exec(() => resolve());
   });
 }
 
@@ -92,10 +89,7 @@ function askCommitMessageAndCommit() {
         .add('./*')
         .commit(commitMessage)
         .push('origin', 'master')
-        .exec(function(){
-          status.stop();
-          resolve();
-        });
+        .exec(() => resolve());
     });
   });
 }
