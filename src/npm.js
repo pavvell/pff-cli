@@ -1,3 +1,5 @@
+let exec = require('child_process').exec;
+
 class NPM {
   patch() {
     console.log('Update version...');
