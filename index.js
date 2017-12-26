@@ -88,7 +88,6 @@ function askCommitMessageAndCommit() {
       git
         .add('./*')
         .commit(commitMessage)
-        .push('origin', 'master')
         .exec(() => resolve());
     });
   });
