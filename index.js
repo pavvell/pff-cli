@@ -1,8 +1,6 @@
 let inquirer = require('inquirer');
 let git = require('simple-git')();
-let clear = require('clear');
 let commander = require('commander');
-let sys = require('sys');
 let exec = require('child_process').exec;
 let CLI = require('clui');
 let Spinner = CLI.Spinner;
@@ -30,8 +28,6 @@ function patchNpmVersion() {
 
   return new Promise((resolve, reject) => {
     exec("npm version patch", function (error, stdout, stderr) {
-      sys.print('stdout: ' + stdout);
-      sys.print('stderr: ' + stderr);
       status.stop();
 
       if (error !== null) {
@@ -50,8 +46,6 @@ function publish() {
 
   return new Promise((resolve, reject) => {
     exec("npm publish", function (error, stdout, stderr) {
-      sys.print('stdout: ' + stdout);
-      sys.print('stderr: ' + stderr);
       status.stop();
 
       if (error !== null) {
